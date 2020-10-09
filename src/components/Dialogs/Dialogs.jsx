@@ -2,30 +2,35 @@ import React from "react";
 import style from "./Dialogs.module.css";
 import {NavLink} from "react-router-dom";
 
+const Dialog = (props) => {
+    let path = "/Dialogs/"+props.id;
+    return (
+        <div className={style.dialog}>
+            <NavLink to={path}>{props.name}</NavLink>
+        </div>
+    );
+}
+
+const Message = (props) => {
+    return (
+        <div className={style.message}>{props.message}</div>
+    );
+}
+
 const Dialogs = (props) => {
     return (
         <div className={style.dialogs}>
             <div className={style.dialogItems}>
-                <div className={style.dialog + ' ' + style.activeItem}>
-                    <NavLink to="/Dialogs/1">Степан Чугунов</NavLink>
-                </div>
-                <div className={style.dialog}>
-                    <NavLink to="/Dialogs/2">Аполлинарий Котлованов</NavLink>
-                </div>
-                <div className={style.dialog}>
-                    <NavLink to="/Dialogs/3">Владимир Пинтусевич</NavLink>
-                </div>
-                <div className={style.dialog}>
-                    <NavLink to="/Dialogs/4">Анатолий Спаснев</NavLink>
-                </div>
-                <div className={style.dialog}>
-                    <NavLink to="/Dialogs/5">Дмитрий Лукин</NavLink>
-                </div>
+                <Dialog name="Степан Чугунов" id="1"/>
+                <Dialog name="Аполлинарий Котлованов" id="2"/>
+                <Dialog name="Владимир Пинтусевич" id="3"/>
+                <Dialog name="Анатолий Спаснев" id="4"/>
+                <Dialog name="Дмитрий Лукин" id="5"/>
             </div>
             <div className={style.messages}>
-                <div className={style.message}>Привет!</div>
-                <div className={style.message}>Как дела?</div>
-                <div className={style.message}>Хорошо. А у тебя?</div>
+                <Message message="Привет!"/>
+                <Message message="Как дела?"/>
+                <Message message="Хорошо. А у тебя?"/>
             </div>
 
         </div>

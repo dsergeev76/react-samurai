@@ -11,8 +11,9 @@
     margin: 10px;
 }
 
-.dialog a {
+a {
     text-decoration: none;
+    color: #853b3b;
 }
 
 .activeItem {
