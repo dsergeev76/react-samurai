@@ -1,0 +1,9 @@
+.header {
+    grid-area: h;
+    /*background-color: darkgreen;*/
+    background-image: url("https://wallpapercave.com/wp/wp5731059.jpg");
+}
+
+.header img {
+    width: 100px;
+}

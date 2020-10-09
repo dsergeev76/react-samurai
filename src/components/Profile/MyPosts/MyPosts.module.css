@@ -1,0 +1,9 @@
+.newpost {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+textarea{
+    background-color: #ffdf66;
+    width: 80%;
+}
