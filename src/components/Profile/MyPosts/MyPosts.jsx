@@ -3,6 +3,14 @@ import style from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
 const MyPosts = (props) => {
+
+    let posts = [
+        { id:1, post: "Привет, как дела?", likes:30 },
+        { id:1, post: "Мое первое тестовое сообщение", likes:80 }
+    ]
+
+    let postsElements = posts.map(post => <Post message={post.post} likes={post.likes}/>);
+
     return <div>
         My Posts
         <div className={style.newpost}>
@@ -13,9 +21,8 @@ const MyPosts = (props) => {
                 <button>Cancel</button>
             </div>
         </div>
-        <div>
-            <Post message="Привет, как дела?" likes="30"/>
-            <Post message="Мое первое тестовое сообщение" likes="80"/>
+        <div className={style.oldpost}>
+            {postsElements}
         </div>
     </div>;
 }
