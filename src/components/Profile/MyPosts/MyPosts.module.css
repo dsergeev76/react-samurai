@@ -1,11 +1,15 @@
-.newpost {
-    margin-bottom: 10px;
+.container {
     margin-top: 10px;
+    margin-bottom: 10px;
+}
+.newpost {
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 .oldpost {
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 textarea{

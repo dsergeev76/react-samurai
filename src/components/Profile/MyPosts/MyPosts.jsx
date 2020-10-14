@@ -11,19 +11,22 @@ const MyPosts = (props) => {
 
     let postsElements = posts.map(post => <Post message={post.post} likes={post.likes}/>);
 
-    return <div>
-        My Posts
-        <div className={style.newpost}>
-            <h4>New post</h4>
-            <textarea cols="30" rows="10"></textarea>
-            <div>
-                <button>Post</button>
-                <button>Cancel</button>
+    return(
+        <div className={style.container}>
+            My Posts
+            <div className={style.newpost}>
+                <h4>New post</h4>
+                <textarea cols="30" rows="10"></textarea>
+                <div>
+                    <button>Post</button>
+                    <button>Cancel</button>
+                </div>
+            </div>
+            <div className={style.oldpost}>
+                {postsElements}
             </div>
         </div>
-        <div className={style.oldpost}>
-            {postsElements}
-        </div>
-    </div>;
+        );
+
 }
 export default MyPosts;

@@ -16,8 +16,12 @@ a {
     color: #853b3b;
 }
 
+a:hover{
+    color: #b7633d;
+}
+
 .activeItem {
-    color: #b73d0a;
+    color: #b7633d;
 }
 
 .messages {
