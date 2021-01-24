@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./users.module.css";
 import userPhoto from "../../assets/images/user.jpg";
 import {NavLink} from "react-router-dom";
-import * as axios from "axios";
+import {followAPI} from "../../api/api";
 
 let Users = (props) => {
 
@@ -31,27 +31,15 @@ let Users = (props) => {
                     <div>
                         {user.followed ?
                             <button onClick={() => {
-                                axios.delete (`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
-                                    withCredentials: true,
-                                    headers: {
-                                        "API-KEY": "dd9c9b22-2524-4727-9b12-db8ac64e1aff"
-                                    }
-                                })
-                                    .then(response => {
-                                        if (response.data.resultCode === 0) {
+                                followAPI.unfollow(user.id).then(data => {
+                                        if (data.resultCode === 0) {
                                             props.unfollow(user.id)
                                         }
                                     });
                             }}>Unfollow</button>:
                             <button onClick={() => {
-                                axios.post (`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
-                                    withCredentials: true,
-                                    headers: {
-                                        "API-KEY": "dd9c9b22-2524-4727-9b12-db8ac64e1aff"
-                                    }
-                                })
-                                    .then(response => {
-                                    if (response.data.resultCode === 0) {
+                                followAPI.follow(user.id).then(data => {
+                                    if (data.resultCode === 0) {
                                         props.follow(user.id)
                                     }
                                 });
