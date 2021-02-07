@@ -21,7 +21,7 @@ const ProfileInfo = (props) => {
                 <div>Какую работу я ищу: {props.profile.lookingForAJobDescription}</div>
                 <div>Страница Вконтакте: {props.profile.contacts.vk}</div>
                 <div>Twitter: {props.profile.contacts.twitter}</div>
-                <ProfileStatus status={'Hello, my friends!'}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
     );
