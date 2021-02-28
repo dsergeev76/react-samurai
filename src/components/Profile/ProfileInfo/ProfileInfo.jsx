@@ -3,25 +3,22 @@ import style from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
-const ProfileInfo = (props) => {
-    if (!props.profile) {
+const ProfileInfo = ({profile, updateStatus, status}) => {
+    if (!profile) {
         return <Preloader/>
     }
 
     return (
         <div className={style.container}>
-            {/*<img className={style.image}
-                 src="http://nrnews.ru/uploads/posts/2019-07/1564046557_25.07.2019_voennosluzhaschie-yuvo-proveli-artilleriyskie-dueli-na-severnom-kavkaze-3.jpg"
-                 alt="2s19"/>*/}
             <div>
-                <div><img src={props.profile.photos.large} alt="avatarLarge"/></div>
-                <div><img src={props.profile.photos.small} alt="avatarSmall"/></div>
-                <div>Обо себе: {props.profile.aboutMe}</div>
-                <div>Меня зовут: {props.profile.fullName}</div>
-                <div>Какую работу я ищу: {props.profile.lookingForAJobDescription}</div>
-                <div>Страница Вконтакте: {props.profile.contacts.vk}</div>
-                <div>Twitter: {props.profile.contacts.twitter}</div>
-                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+                <div><img src={profile.photos.large} alt="avatarLarge"/></div>
+                <div><img src={profile.photos.small} alt="avatarSmall"/></div>
+                <div>Обо себе: {profile.aboutMe}</div>
+                <div>Меня зовут: {profile.fullName}</div>
+                <div>Какую работу я ищу: {profile.lookingForAJobDescription}</div>
+                <div>Страница Вконтакте: {profile.contacts.vk}</div>
+                <div>Twitter: {profile.contacts.twitter}</div>
+                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
             </div>
         </div>
     );
