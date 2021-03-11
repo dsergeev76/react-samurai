@@ -9,3 +9,11 @@
     margin-left: auto;
     margin-bottom: 10px;
 }
+
+.mainPhoto {
+    max-width: 300px;
+}
+
+.smallPhoto {
+    max-width: 100px;
+}
