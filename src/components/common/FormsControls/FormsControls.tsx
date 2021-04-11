@@ -45,3 +45,5 @@ export function createField<FormKeysType extends string> (placeholder: string | 
                {...props}/>{text}
     </div>
 }
+
+export type GetStringKeys<T> = Extract<keyof T, string>
