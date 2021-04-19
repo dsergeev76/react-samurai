@@ -1,19 +1,19 @@
-import React, {ComponentType} from 'react';
+import React from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {BrowserRouter, Route, withRouter, Switch, Redirect} from "react-router-dom";
-import UsersContainer from "./components/Users/UsersContainer";
+import {BrowserRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
+import {UsersPage} from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
 import {connect, Provider} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import {compose} from "redux";
 import store, {AppStateType} from "./redux/redux-store";
 import {withSuspense} from "./hoc/withSuspense";
+import {LoginPage} from "./components/Login/LoginPage";
 //import DialogsContainer from "./components/Dialogs/DialogsContainer";
 //import ProfileContainer from "./components/Profile/ProfileInfo/ProfileContainer";
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
@@ -56,11 +56,11 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                         <Route exact path="/" render={() => <Redirect to={"/Profile/"}/>}/>
                         <Route path="/Profile/:userId?" render={() => <SuspendedProfile /> }/>
                         <Route path="/Dialogs" render={() => <SuspendedDialogs /> }/>
-                        <Route path="/Users" render={() => <UsersContainer pageTitle={'Самураи'}/>}/>
+                        <Route path="/Users" render={() => <UsersPage pageTitle={'Самураи'}/>}/>
                         <Route path="/News" render={() => <News/>}/>
                         <Route path="/Music" render={() => <Music/>}/>
                         <Route path="/Settings" render={() => <Settings/>}/>
-                        <Route path="/Login" render={() => <Login/>}/>
+                        <Route path="/Login" render={() => <LoginPage/>}/>
                         <Route path="*" render={() => <div>404 - NOT FOUND</div>}/>
                     </Switch>
                 </div>
