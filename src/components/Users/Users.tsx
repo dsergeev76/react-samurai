@@ -12,10 +12,12 @@ import {
     getUsers,
     getUsersFilter
 } from "../../redux/users-selectors";
+import {useHistory} from "react-router-dom";
+import * as queryString from "querystring";
 
-type PropsType = {
+type PropsType = {}
 
-}
+type QueryParamsType = { term?: string; page?: string; friend?: string }
 
 export const Users: React.FC<PropsType> = (props) => {
 
@@ -27,10 +29,47 @@ export const Users: React.FC<PropsType> = (props) => {
     const followingInProgress = useSelector(getFollowingInProgress)
 
     const dispatch = useDispatch()
+    const history = useHistory()
 
     useEffect(()=>{
-        dispatch(requestUsers(currentPage, pageSize, filter));
-    },[])
+        const parsed = queryString.parse(history.location.search.substr(1)) as QueryParamsType
+
+        let actualPage = currentPage
+        let actualFilter = filter
+
+        if (!!parsed.page) actualPage = Number(parsed.page)
+
+
+        if (!!parsed.term) actualFilter = {...actualFilter, term: parsed.term as string}
+
+        switch(parsed.friend) {
+            case "null":
+                actualFilter = {...actualFilter, friend: null}
+                break;
+            case "true":
+                actualFilter = {...actualFilter, friend: true}
+                break;
+            case "false":
+                actualFilter = {...actualFilter, friend: false}
+                break;
+        }
+
+        dispatch(requestUsers(actualPage, pageSize, actualFilter))
+
+    }, [])
+
+    useEffect(() => {
+        const query: QueryParamsType = {}
+
+        if (!!filter.term) query.term = filter.term
+        if (filter.friend !== null) query.friend = String(filter.friend)
+        if (currentPage !== 1) query.page = String(currentPage)
+
+        history.push({
+            pathname: '/users',
+            search: queryString.stringify(query)
+        })
+}, [filter, currentPage])
 
     const onPageChanged = (pageNumber: number) => {
         dispatch(requestUsers(pageNumber, pageSize, filter));
@@ -49,15 +88,16 @@ export const Users: React.FC<PropsType> = (props) => {
 
     return <div>
 
-        <UsersSearchForm onFilterChanged={onFilterChanged} />
+        <UsersSearchForm onFilterChanged={onFilterChanged}/>
 
-        <Paginator currentPage={currentPage} onPageChanged={onPageChanged} totalItemsCount={totalUsersCount} pageSize={pageSize}/>
+        <Paginator currentPage={currentPage} onPageChanged={onPageChanged} totalItemsCount={totalUsersCount}
+                   pageSize={pageSize}/>
         {
-            users.map (user => <User key={user.id}
-                                     user={user}
-                                     followingInProgress={followingInProgress}
-                                     follow={follow}
-                                     unfollow={unfollow}/>)
+            users.map(user => <User key={user.id}
+                                    user={user}
+                                    followingInProgress={followingInProgress}
+                                    follow={follow}
+                                    unfollow={unfollow}/>)
 
         }
     </div>
