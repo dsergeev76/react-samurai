@@ -24,6 +24,7 @@ const {Content, Footer, Sider} = Layout;
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileInfo/ProfileContainer'));
+const ChatPage = React.lazy(() => import('./pages/Chat/ChatPage'));
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
 type DispatchPropsType = {
@@ -32,6 +33,7 @@ type DispatchPropsType = {
 
 const SuspendedDialogs = withSuspense(DialogsContainer);
 const SuspendedProfile = withSuspense(ProfileContainer);
+const SuspendedChat = withSuspense(ChatPage);
 
 class App extends React.Component<MapPropsType & DispatchPropsType> {
 
@@ -83,8 +85,8 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                                     <Menu.Item key="7">option7</Menu.Item>
                                     <Menu.Item key="8">option8</Menu.Item>
                                 </SubMenu>
-                                <SubMenu key="sub3" icon={<NotificationOutlined/>} title="subnav 3">
-                                    <Menu.Item key="9">option9</Menu.Item>
+                                <SubMenu key="sub3" icon={<NotificationOutlined/>} title="ЧаДЪ">
+                                    <Menu.Item key="9"><Link to="/chat">Чат</Link></Menu.Item>
                                     <Menu.Item key="10">option10</Menu.Item>
                                     <Menu.Item key="11">option11</Menu.Item>
                                     <Menu.Item key="12">option12</Menu.Item>
@@ -101,6 +103,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                                 <Route path="/Music" render={() => <Music/>}/>
                                 <Route path="/Settings" render={() => <Settings/>}/>
                                 <Route path="/Login" render={() => <LoginPage/>}/>
+                                <Route path="/chat" render={() => <SuspendedChat/>}/>
                                 <Route path="*" render={() => <div>404 - NOT FOUND</div>}/>
                             </Switch>
                         </Content>
